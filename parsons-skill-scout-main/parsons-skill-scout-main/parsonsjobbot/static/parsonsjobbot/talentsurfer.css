@@ -1,0 +1,73 @@
+.btn-talent-surfer-page {
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition-duration: 0.3s;
+    cursor: pointer;
+    margin-right: 10px; /* Add margin between buttons */
+    margin-bottom: 10px; /* Add margin at the bottom of the button group */
+}
+
+
+.btn-talent-surfer-page:last-child {
+    margin-right: 0; /* Remove right margin for the last button in the group */
+}
+
+
+.btn-talent-surfer-page:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    border: 1px solid #a1a1a1;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    color: #a1a1a1;
+}
+
+
+.custom-file-input {
+    border: 1px solid #ccc;
+    padding: 10px;
+    color: white;
+  }
+
+ul.messages {
+    list-style-type: none;
+}
+
+.container-scroll{
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+.btn-candidate-detail-page {
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition-duration: 0.3s;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.btn-candidate-detail-page:last-child {
+    margin-right: 0; /* Remove right margin for the last button in the group */
+}
+
+.btn-candidate-detail-page:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    border: 1px solid #a1a1a1;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    color: white;
+}

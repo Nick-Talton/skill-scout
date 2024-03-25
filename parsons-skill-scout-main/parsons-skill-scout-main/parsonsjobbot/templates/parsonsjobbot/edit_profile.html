@@ -1,0 +1,73 @@
+{% extends "parsonsjobbot/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block description %}Profile Edit{% endblock %}
+{% block title %}Profile Edit{% endblock %}
+{% block navtitle %}Profile Edit{% endblock %}
+{% block something-link-style %}fw-bold{% endblock %}
+
+
+{% block content %}
+{% if user.is_authenticated %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center mt-5" style="color: white;">
+            <h1>Edit Profile</h1>
+            <form method="post" action="{% url 'parsonsjobbot:edit-profile' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" class="form-control" value="{{ user.get_full_name }}">
+                </div>
+                <div class="form-group">
+                    <label for="groups">Groups:</label>
+                    <select id="groups" name="groups" class="form-control" multiple>
+                        {% for group in groups %}
+                            <option value="{{ group.id }}" {% if group in user.groups.all %}selected{% endif %}>{{ group.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+            <ul class="list-unstyled">
+                <li style="margin-bottom: 50px; margin-top: 30px;">
+                    <a href="{% url 'landing_page:landing_page' %}" class="btn-talent-surfer-page">Go to Home Page</a>
+                    <a href="{% url 'parsonsjobbot:home' %}" class="btn-talent-surfer-page">Go to Talent Surfer</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% else %}
+<body>
+    <div class="container-scroll">
+        <div class="container d-flex align-items-center justify-content-center" style="min-height: 75vh;">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <div class="d-flex flex-column">
+                        <h1 style="color: white; font-size: 64px;">Skill Scout Home</h1>
+                        <p class="login-statement" style="color: white; font-size: 32px;">We are excited to have you join Skill Scout, but first we need you to login.</p>
+                        <a class="btn-talent-surfer-page" href="{% url 'landing_page:login' %}">Login</a>
+                        <h1 style="color: white; font-size: 64px;">What is Skill Scout?</h1>
+                        <p style="color: white; font-size: 24px;">
+                            Skill Scout is an innovative application currently being developed here at Parsons.
+                            Skill Scout aims to connect job seekers within and outside of Parsons to a vast network of opportunities, helping individuals find their dream careers.
+                            Our platform utilizes cutting-edge technology and leverages the expertise of Parsons to match users with the perfect job based on their skills, aspirations, and unique talents.
+                            Whether you are an employee, intern, or someone seeking new professional opportunities, Skill Scout is here to support you in your journey towards success.
+                        </p>
+                        <a href="{% url 'landing_page:redirect-to-jobbot-about' %}" class="btn-talent-surfer-page">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{% endif %}
+
+  
+{% endblock %}
+
+
+
+
+

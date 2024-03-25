@@ -1,0 +1,83 @@
+.btn-talent-surfer {
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition-duration: 0.3s;
+    cursor: pointer;
+}
+
+.btn-talent-surfer:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    border: 1px solid #a1a1a1;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    color: #a1a1a1;
+}
+
+.rotating-text {
+    color: rgba(255, 255, 255, 1);
+    font-size: 36px;
+    opacity: 0;
+    animation: rotating-animation 3s linear infinite;
+}
+
+
+@keyframes rotating-animation {
+    0% {
+        opacity: 0;
+    }
+    33.33% {
+        opacity: 1;
+    }
+    66.66% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.login-container {
+    text-align: center;
+    margin-top: 100px;
+}
+
+
+.login-statement {
+    color: white;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+
+.login-button {
+    display: inline-block;
+    background-color: #0a1d30;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.container-scroll{
+    max-height: 100vh;
+    overflow-y: auto;
+}
+
+
+
+
+  
+  
+  
+  
+  
+
+
+
+

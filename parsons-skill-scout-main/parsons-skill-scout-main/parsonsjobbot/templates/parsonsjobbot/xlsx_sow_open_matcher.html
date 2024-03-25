@@ -1,0 +1,127 @@
+{% extends "parsonsjobbot/base.html"%}
+{% load static %}
+{% load auth_extras %}
+{% block description %}Vacancy Openings{% endblock %}
+{% block title %}Vacancy Openings{% endblock %}
+{% block navtitle %}Vacancy Openings{% endblock %}
+{% block something-link-style %}fw-bold{% endblock %}
+
+
+
+{% block content %}
+<style>
+    /* Style for the search form */
+    .search-form {
+        margin-bottom: 20px;
+    }
+  
+    .search-input {
+        width: 70%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+  
+    .search-button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        padding: 8px 15px;
+    }
+  
+    .search-button:hover {
+        background-color: #45a049;
+    }
+  </style>
+{% if user.is_authenticated %}
+    {% if request.user|has_group:"TOPM" or request.user|has_group:"TA" or request.user|has_group:"PM" or request.user|has_group:"Admin" %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mt-5">
+                <h1 style="color: white; font-size: 64px;">Vacancy Openings</h1>
+                <form method="GET" class="search-form">
+                    <input type="text" name="tonum" placeholder="Task Order Number">
+                    <input type="text" name="posnum" placeholder="Position Number">
+                    <button type="submit" class="btn btn-primary search-button">Search</button>
+                </form>
+                {% if sow_positions %}
+                    <div class="resume-list" style="color: white; border: 1px solid white; padding: 25px; margin-bottom: 25px; background-color: rgba(0, 0, 0, 0.3); box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); ">
+                        <h2 class="sow-openings-header" style="color: white;">Vacancy Opportunities</h2>
+                    
+                        <div class="row">
+                            {% for position in sow_positions %}
+                            <div class="col-md-4 mb-4">
+                                <div class="sow-opening-item">
+                                    <a href="{% url 'parsonsjobbot:xlsx-sow-open-detail-match' position.pk %}" class="btn-talent-surfer-page">
+                                        <strong>(TO #: {{position.tonum}}/ Position #: {{position.posnum}})</strong> {{ position.job_title }} Skill Level: {{ position.level }}
+                                    </a>
+                                </div>
+                            </div>
+                            {% if forloop.counter|divisibleby:3 and not forloop.last %}
+                                </div>
+                                <div class="row">
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% else %}
+                <div class="resume-list" style="color: white; border: 1px solid white; padding: 25px; margin-bottom: 25px; background-color: rgba(0, 0, 0, 0.3); box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); ">
+                    <h2 class="sow-openings-header" style="color: white;">Vacancy Opportunities</h2>
+                    <p style="color: white;">No Opportunities Available.</p>
+                </div>
+                {% endif %}
+
+                
+                <ul class="list-unstyled">
+                    <li style="margin-bottom: 10px;">
+                        <a href="{% url 'parsonsjobbot:home' %}" class="btn-talent-surfer-page">Go to Talent Surfer</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% else %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center mt-5">
+            <p style="color: white;">Oops! You aren't supposed to be here, are you?</p>
+            <ul class="list-unstyled">
+                <li style="margin-bottom: 10px;">
+                    <a href="{% url 'landing_page:landing_page' %}" class="btn-talent-surfer-page">Go to Home Page</a> 
+                    <a href="{% url 'parsonsjobbot:home' %}" class="btn-talent-surfer-page">Return to Talent Surfer</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% else %}
+<body>
+    <div class="container-scroll">
+        <div class="container d-flex align-items-center justify-content-center" style="min-height: 75vh;">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <div class="d-flex flex-column">
+                        <h1 style="color: white; font-size: 64px;">Skill Scout Home</h1>
+                        <p class="login-statement" style="color: white; font-size: 32px;">We are excited to have you join Skill Scout, but first we need you to login.</p>
+                        <a class="btn-talent-surfer-page" href="{% url 'landing_page:login' %}">Login</a>
+                        <h1 style="color: white; font-size: 64px;">What is Skill Scout?</h1>
+                        <p style="color: white; font-size: 24px;">
+                            Skill Scout is an innovative application currently being developed here at Parsons.
+                            Skill Scout aims to connect job seekers within and outside of Parsons to a vast network of opportunities, helping individuals find their dream careers.
+                            Our platform utilizes cutting-edge technology and leverages the expertise of Parsons to match users with the perfect job based on their skills, aspirations, and unique talents.
+                            Whether you are an employee, intern, or someone seeking new professional opportunities, Skill Scout is here to support you in your journey towards success.
+                        </p>
+                        <a href="{% url 'landing_page:redirect-to-jobbot-about' %}" class="btn-talent-surfer-page">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{% endif %}
+{% endblock %}

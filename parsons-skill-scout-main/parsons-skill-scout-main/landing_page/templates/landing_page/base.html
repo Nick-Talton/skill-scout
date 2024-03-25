@@ -1,0 +1,91 @@
+{% load static %}
+<html lang="en" class="h-100">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="Parsons">
+        <meta name="description" content="Parsons Skill Scout {% block description %}{% endblock %} page">
+        <meta name="keywords" content="hiring, Parsons, jobs">
+        <link rel="icon" href="/static/landing_page/landing_favicon.png">
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
+      
+        <title>Parsons Skill Scout - {% block title %}{% endblock %}</title>
+
+        <style>
+          body {
+            background-image: url("{% static 'landing_page/background.jpg' %}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+          }
+        </style>
+
+      
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+        crossorigin="anonymous">
+
+        <link rel="stylesheet" href="{% static 'landing_page/style.css' %}">
+    </head>
+
+    <body class="d-flex flex-column h-100">
+      <header class="container-fluid ps-4" style="background-color:#0a1d30; border-bottom: 10px solid #20344c;">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+          <img src="{% static 'landing_page/parsons_logo.png' %}" alt="Logo" class="navbar-logo" width="300">
+          <a class="navbar-brand fw-bold fs-1 text-white" href="{% url 'landing_page:landing_page' %}">
+            Skill Scout - {% block navtitle %}{% endblock %}
+          </a>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto">
+              {% if user.is_authenticated %}
+                <li class="nav-item" title="Profile Image">
+                  <a style="background-color: white; border-radius: 100%; margin-right: 10px;" class="nav-link" href="{% url 'landing_page:redirect-to-jobbot-profile' %}" target="_blank" rel="noopener noreferrer">
+                    <img src="{% static 'landing_page/user_logo.png' %}" alt="User Logo" style="width:25px;height:25px;">
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-white" href="{% url 'landing_page:redirect-to-jobbot-profile' %}">View Profile</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-white" href="#" onclick="confirmLogout()">Logout</a>
+
+                </li>
+              {% else %}
+                <li class="nav-item">
+                  <a class="nav-link text-white" href="{% url 'landing_page:login' %}">Login</a>
+                </li>
+              {% endif %}
+              <li class="nav-item">
+                <a class="nav-link text-white" href="https://www.parsons.com/life/">About Parsons</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+    
+    
+      
+      {% block content %}{% endblock %}
+
+
+      <script src="{% static 'landing_page/rotating-messages.js' %}"></script>
+      <script>
+        function confirmLogout() {
+            if (confirm('Are you sure you want to log out?')) {
+                window.location.href = "{% url 'landing_page:logout' %}";
+            }
+        }
+      </script>
+    
+
+      <footer class="footer mt-auto text-center bg-light">
+        <div class="p-3 text-muted" style="background-color:#0a1d30;">
+          © 2023 Copyright:
+          <a class="text-reset" href="https://www.parsons.com/">Parsons</a>
+        </div>
+      </footer>
+    </body>
+
+    
+</html>

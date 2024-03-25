@@ -1,0 +1,80 @@
+{% extends "parsonsjobbot/base.html"%}
+{% load static %}
+{% block description %}About{% endblock %}
+{% block title %}About{% endblock %}
+{% block navtitle %}About{% endblock %}
+{% block something-link-style %}fw-bold{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center mt-5">
+            <div class="aboutpage" style="color: white; border: 1px solid white; padding: 25px; margin-bottom: 25px; background-color: rgba(0, 0, 0, 0.3); box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); ">
+                <h1 style="color: white; font-size: 72px;">About</h1>
+
+                <h2 style="color: white; font-size: 48px;">Skill Scout Intelligent Candidate Matching Platform</h2>
+                <p style="color: white; font-size: 24px;">
+                    Skill Scout is a cutting-edge, full stack web application designed to revolutionize the candidate matching process for recruiters and hiring managers. The platform leverages the powerful Django framework and advanced Natural Language Processing (NLP) techniques to create a seamless user experience.
+                </p>
+
+                <h3 style="color: white; font-size: 32px;">Key Features and Achievements:</h3>
+                <p style="color: white; font-size: 18px;">
+                    <strong>Excel Spreadsheet Data Ingestion</strong>: Skill Scout automates data ingestion from Excel spreadsheets, converting it into structured objects in a MySQL backend, reducing administrative overhead and improving data accuracy.
+                    <br>
+                    <strong>PDF/Word Document Table Scanning</strong>: The platform intelligently scans and extracts job positions from PDF and Word documents, saving users countless hours of manual work.
+                    <br>
+                    <strong>Natural Language Processing (NLP) for Resume Parsing</strong>: Skill Scout effortlessly extracts vital candidate information, such as skills, education, and more, from submitted resumes, enhancing the user experience.
+                    <br>
+                    <strong>Intelligent Candidate-Skill Matching</strong>: Skill Scout matches candidates with open job positions efficiently, utilizing NLP to dynamically compare candidate skills with job descriptions and generating a unique similarity score for each position.
+                </p>
+
+                <h3 style="color: white; font-size: 32px;">Technologies and Tools:</h3>
+                <p style="color: white; font-size: 18px;">
+                    Django framework for rapid web application development.
+                    <br>
+                    MySQL for efficient data storage and retrieval.
+                    <br>
+                    Python's powerful NLP libraries, including NLTK and spaCy, for advanced text analysis and understanding.
+                    <br>
+                    PDFMiner and python-docx for processing PDF and Word documents.
+                </p>
+
+                <h3 style="color: white; font-size: 32px;">Impact and Results:</h3>
+                <p style="color: white; font-size: 18px;">
+                    Reduced candidate search time through automated resume parsing and skill extraction.
+                    <br>
+                    Increased recruiter productivity by automating candidate-skill comparison.
+                </p>
+
+                <h3 style="color: white; font-size: 32px;">Demonstrated Skills:</h3>
+                <p style="color: white; font-size: 18px;">
+                    Full stack web development using Django.
+                    <br>
+                    Data ingestion and management with MySQL.
+                    <br>
+                    Natural Language Processing (NLP) techniques for intelligent text analysis.
+                    <br>
+                    PDF and Word document processing and extraction.
+                    <br>
+                    Project management and team coordination.
+                </p>
+
+                <h3 style="color: white; font-size: 32px;">Future Development:</h3>
+                <p style="color: white; font-size: 18px;">
+                    Continuously striving for improvement, I plan to expand Skill Scout's capabilities by integrating machine learning algorithms to enhance candidate-job matching accuracy. Additionally, I aim to introduce a user-friendly dashboard for visualizing hiring trends and statistics, further empowering recruiters to make data-driven decisions. Additionally I am working on making a forecasting "What if?" Job filling where you can pick a candidate and a job and then backfill the previous position that is now vacant with people from that candidate's team.
+                </p>
+
+                <p style="color: white; font-size: 18px;">
+                    Skill Scout remains an ongoing project, aiming to meet the ever-changing needs of the hiring landscape.
+                </p>
+                
+                <ul class="list-unstyled">
+                    <li style="margin-bottom: 10px;">
+                        <a href="{% url 'landing_page:landing_page' %}" class="btn-talent-surfer-page">Return to Home Page</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

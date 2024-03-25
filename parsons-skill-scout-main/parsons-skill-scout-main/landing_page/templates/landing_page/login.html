@@ -1,0 +1,97 @@
+{% extends "landing_page/base.html" %}
+{% load static %}
+{% block description %}Login Page{% endblock %}
+{% block title %}Login Page{% endblock %}
+{% block navtitle %}Login{% endblock %}
+{% block something-link-style %}fw-bold{% endblock %}
+
+
+
+
+{% block content %}
+<style>
+    .login-box {
+        background-color: #ffffff;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .login-title {
+        color: #000000;
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+    
+    .login-form {
+        margin-bottom: 20px;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .form-group label {
+        font-weight: bold;
+    }
+    
+    .form-control {
+        border: 1px solid #cccccc;
+        border-radius: 5px;
+        padding: 10px;
+        width: 100%;
+    }
+    
+    .login-button {
+        background-color: #20344c;
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    
+    .login-button:hover {
+        background-color: #1a2e40;
+    }
+    
+    .login-link {
+        margin-right: 10px;
+        font-weight: bold;
+        color: #20344c;
+        text-decoration: none;
+    }
+    
+    .login-link:hover {
+        text-decoration: underline;
+    }
+</style>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center mt-5">
+            <div class="login-box">
+                <h1 class="login-title">Login</h1>
+                <form class="login-form" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="id_username">Username</label>
+                        <input type="text" name="username" id="id_username" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="id_password">Password</label>
+                        <input type="password" name="password" id="id_password" class="form-control">
+                    </div>
+                    <button type="submit" class="login-button">Login</button>
+                </form>
+                <a href="{% url 'landing_page:landing_page' %}" class="login-link">Back to Home Page</a>
+                <a href="{% url 'landing_page:signup' %}" class="login-link">Sign up</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

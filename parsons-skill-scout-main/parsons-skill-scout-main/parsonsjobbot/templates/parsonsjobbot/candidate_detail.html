@@ -1,0 +1,119 @@
+{% extends "parsonsjobbot/base.html" %}
+{% load static %}
+{% load auth_extras %}
+{% block description %}Candidate Details{% endblock %}
+{% block title %}Candidate Details{% endblock %}
+{% block navtitle %}Candidate Details{% endblock %}
+{% block something-link-style %}fw-bold{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+
+<style>
+    .sticky-container {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 20px;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mt-5">
+            <div class="sticky-container">
+                <!-- Candidate Details -->
+                <h1 style="color: white;">Candidate Details</h1>
+                {% if candidate %}
+                    <div class="candidate-details" style="color: white; border: 1px solid white; padding: 25px; margin-bottom: 25px; background-color: rgba(0, 0, 0, 0.3); box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); ">
+                        <h2><strong>Name:</strong> {{ candidate.name }}</h2>
+                        <p><strong>Skills:</strong> {{ candidate.skills }}</p>
+                        <p><strong>Years of Experience:</strong> {{ candidate.years_of_experience }}</p>
+                        <p><strong>Education:</strong> {{ candidate.education }}</p>
+                    </div>
+                {% else %}
+                    <p style="color: white;">Candidate not found.</p>
+                {% endif %}
+                
+                {% if request.user|has_group:"TOPM" or request.user|has_group:"TA" or request.user|has_group:"PM" or request.user|has_group:"Admin" %}
+                    <!-- Assign Candidate to User -->
+                    <h1 style="color: white;">Assign Candidate to User</h1>
+                    <div class="user-reassign" style="color: white; border: 1px solid white; padding: 25px; margin-bottom: 25px; background-color: rgba(0, 0, 0, 0.3); box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); ">
+                        <form method="post">
+                            <div class="form-group" style="color: white; margin-bottom: 25px;">
+                                {% csrf_token %}
+                                {{ reassign_user_form }}
+                            </div>
+                            <button type="submit" class="btn-talent-surfer-page">Assign User</button>
+                        </form>
+                    </div>
+                {% endif %}
+
+                <ul class="list-unstyled">
+                    <li style="margin-bottom: 25px;">
+                        <a href="{% url 'parsonsjobbot:candidates' %}" class="btn-talent-surfer-page">Return to Job Recommendations for People</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-md-6 mt-5">
+            <!-- Matched Jobs -->
+            <h1 style="color: white;">Matched Jobs</h1>
+            {% if matched_jobs %}
+                <div class="resume-list" style="color: white; border: 1px solid white; padding: 25px; margin-bottom: 25px; background-color: rgba(0, 0, 0, 0.3); box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); ">
+                    <h2>Matched Jobs and Similarity Scores</h2>
+                    <div class="row">
+                        {% for sow_position, similarity_score in matched_jobs %}
+                        <div class="col-md-4 mb-4">
+                            <!-- btn-candidate-detail-page is not working sometimes..? just use btn-talent-surfer-page if it persists (or clear your cache I think) -->
+                            <a href="{% url 'parsonsjobbot:xlsx-sow-open-detail' sow_position.pk %}" class="btn-candidate-detail-page" style="color: white; display: block; border: 1px solid white; padding: 10px;">
+                                <p>Task Order: <strong>{{ sow_position.tonum }}</strong></p>
+                                <p>Position Number: <strong>{{ sow_position.posnum }}</strong></p>
+                                <p>Position ID: <strong>{{ sow_position.pos_id }}</strong>
+                                <p>Job Title: {{ sow_position.job_title }}</p>
+                                <p>Similarity Score: {{ similarity_score|floatformat:0 }}%</p>
+                            </a>
+                        </div>
+                        {% if forloop.counter|divisibleby:3 and not forloop.last %}
+                            </div>
+                            <div class="row">
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% else %}
+                <p style="color: white;">No matched jobs found.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% else %}
+<body>
+    <div class="container-scroll">
+        <div class="container d-flex align-items-center justify-content-center" style="min-height: 75vh;">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <div class="d-flex flex-column">
+                        <h1 style="color: white; font-size: 64px;">Skill Scout Home</h1>
+                        <p class="login-statement" style="color: white; font-size: 32px;">We are excited to have you join Skill Scout, but first we need you to login.</p>
+                        <a class="btn-talent-surfer-page" href="{% url 'landing_page:login' %}">Login</a>
+                        <h1 style="color: white; font-size: 64px;">What is Skill Scout?</h1>
+                        <p style="color: white; font-size: 24px;">
+                            Skill Scout is an innovative application currently being developed here at Parsons.
+                            Skill Scout aims to connect job seekers within and outside of Parsons to a vast network of opportunities, helping individuals find their dream careers.
+                            Our platform utilizes cutting-edge technology and leverages the expertise of Parsons to match users with the perfect job based on their skills, aspirations, and unique talents.
+                            Whether you are an employee, intern, or someone seeking new professional opportunities, Skill Scout is here to support you in your journey towards success.
+                        </p>
+                        <a href="{% url 'landing_page:redirect-to-jobbot-about' %}" class="btn-talent-surfer-page">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{% endif %}
+{% endblock %}
+
+
+

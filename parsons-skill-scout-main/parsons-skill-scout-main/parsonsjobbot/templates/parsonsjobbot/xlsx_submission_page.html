@@ -1,0 +1,95 @@
+{% extends "parsonsjobbot/base.html" %}
+{% load static %}
+{% load auth_extras %}
+{% block description %}NEE Submission{% endblock %}
+{% block title %}NEE Submission{% endblock %}
+{% block navtitle %}NEE Submission{% endblock %}
+{% block something-link-style %}fw-bold{% endblock %}
+
+
+{% block content %}
+{% if user.is_authenticated %}
+    {% if request.user|has_group:"TOPM" or request.user|has_group:"TA" or request.user|has_group:"PM" or request.user|has_group:"Admin" %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mt-5">
+                <h1 style="color: white; font-size: 64px;">Submit a NEE Report</h1>
+                    <div class="homepage" style="color: white; border: 1px solid white; padding: 25px; margin-bottom: 25px; background-color: rgba(0, 0, 0, 0.3); box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); ">
+                    {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                                <li {% if message.tags %} class="{{ message.tags }}"{% endif %} style="color: white; font-size: 32px;">{{ message.message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+
+                    <div class="d-flex justify-content-center">
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="{{ form.xlsx.id_for_label }}" class="form-label" style="border: 1px solid #ccc; padding: 10px; color: white;">Upload NEE:</label>
+                                {{ form.xlsx }}
+                            </div>
+                            <button type="submit" class="btn-talent-surfer-page">Upload</button>
+                        </form>
+                    </div>
+
+
+                    <ul class="list-unstyled">
+                        <li style="margin-bottom: 25px;">
+                            <a href="{% url 'parsonsjobbot:home' %}" class="btn-talent-surfer-page">Return to Talent Surfer</a>
+                        </li>
+                        <li style="margin-bottom: 25px;">
+                            <a href="{% url 'landing_page:landing_page' %}" class="btn-talent-surfer-page">Return to Home Page</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mt-5">
+                <p style="color: white;">Oops! You aren't supposed to be here are you?</p>
+                <ul class="list-unstyled">
+                    <li style="margin-bottom: 10px;">
+                        <a href="{% url 'landing_page:landing_page' %}" class="btn-talent-surfer-page">Go to Home Page</a> 
+                        <a href="{% url 'parsonsjobbot:home' %}" class="btn-talent-surfer-page">Return to Talent Surfer</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% else %}
+<body>
+    <div class="container-scroll">
+        <div class="container d-flex align-items-center justify-content-center" style="min-height: 75vh;">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <div class="d-flex flex-column">
+                        <h1 style="color: white; font-size: 64px;">Skill Scout Home</h1>
+                        <p class="login-statement" style="color: white; font-size: 32px;">We are excited to have you join Skill Scout, but first we need you to login.</p>
+                        <a class="btn-talent-surfer-page" href="{% url 'landing_page:login' %}">Login</a>
+                        <h1 style="color: white; font-size: 64px;">What is Skill Scout?</h1>
+                        <p style="color: white; font-size: 24px;">
+                            Skill Scout is an innovative application currently being developed here at Parsons.
+                            Skill Scout aims to connect job seekers within and outside of Parsons to a vast network of opportunities, helping individuals find their dream careers.
+                            Our platform utilizes cutting-edge technology and leverages the expertise of Parsons to match users with the perfect job based on their skills, aspirations, and unique talents.
+                            Whether you are an employee, intern, or someone seeking new professional opportunities, Skill Scout is here to support you in your journey towards success.
+                        </p>
+                        <a href="{% url 'landing_page:redirect-to-jobbot-about' %}" class="btn-talent-surfer-page">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{% endif %}
+{% endblock %}
+
+
+
+
+

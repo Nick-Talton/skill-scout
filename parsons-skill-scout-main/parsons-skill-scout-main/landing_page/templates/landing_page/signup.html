@@ -1,0 +1,91 @@
+{% extends "landing_page/base.html" %}
+{% load static %}
+{% block description %}Signup Page{% endblock %}
+{% block title %}Signup Page{% endblock %}
+{% block navtitle %}Sign up{% endblock %}
+{% block something-link-style %}fw-bold{% endblock %}
+
+
+{% block content %}
+<style>
+    .signup-box {
+        background-color: #ffffff;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .signup-title {
+        color: #000000;
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+    
+    .signup-form {
+        margin-bottom: 20px;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .form-group label {
+        font-weight: bold;
+    }
+    
+    .form-control {
+        border: 1px solid #cccccc;
+        border-radius: 5px;
+        padding: 10px;
+        width: 100%;
+    }
+    
+    .signup-button {
+        background-color: #20344c;
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    
+    .signup-button:hover {
+        background-color: #1a2e40;
+    }
+    
+    .signup-link {
+        margin-right: 10px;
+        font-weight: bold;
+        color: #20344c;
+        text-decoration: none;
+    }
+    
+    .signup-link:hover {
+        text-decoration: underline;
+    }
+</style>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center mt-5">
+            <div class="signup-box">
+                <h1 class="signup-title">Signup</h1>
+                <form class="signup-form" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="signup-button">Sign Up</button>
+                </form>
+                <a href="{% url 'landing_page:landing_page' %}" class="signup-link">Back to Home Page</a>
+                <a href="{% url 'landing_page:login' %}" class="signup-link">Login</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+
